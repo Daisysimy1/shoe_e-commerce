@@ -6,4 +6,8 @@ Rails.application.routes.draw do
 
   #shoes
   post 'shoes/create', to: 'kiatus#create_shoe'
+  get 'shoes', to: 'kiatus#list_shoes'
+  put 'shoes/:shoe_id/update', to: 'kiatus#update_shoe'
+  destroy 'shoes/:shoe_id/destroy', to: 'kiatus#delete_shoe'
+
 end

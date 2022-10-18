@@ -19,8 +19,20 @@ class KiatusController < ApplicationController
             end
     end
     def list_shoes 
+        shoes = Kiatu.all 
+        app_response(status_code: 200, body: shoes)
     end
     def update_shoe
+        shoes = Kiatu.find(params[:shoes_id])
+        app_response(status_code: 404, message: "Invalid shoe") unless shoes.valid?
+        shoes.update(shoe_params)
+        app_response(status_code: 200, message: "Updated successfully", body: shoes)
+    end
+    def delete_shoe 
+        shoes = Kiatu.find(params[:shoes_id])
+        app_response(status_code: 404, message: "Invalid shoe") unless shoes.valid?
+        shoes.destroy(shoe_params)
+        app_response(status_code: 200, message: "Deleted successfully")
     end
     private 
     def shoe_params 
